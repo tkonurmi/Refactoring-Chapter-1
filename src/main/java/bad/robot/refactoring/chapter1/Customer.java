@@ -3,16 +3,16 @@ package bad.robot.refactoring.chapter1;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Customer {
+class Customer {
 
-    private String name;
-    private List<Rental> rentals = new ArrayList<Rental>();
+    private final String name;
+    private final List<Rental> rentals = new ArrayList<Rental>();
 
     public Customer(String name) {
         this.name = name;
     }
 
-    public String getName() {
+    private String getName() {
         return name;
     }
 
@@ -21,27 +21,27 @@ public class Customer {
     }
 
     public String statement() {
-        String result = "Rental record for " + getName() + "\n";
+        StringBuilder result = new StringBuilder("Rental record for " + getName() + "\n");
         for (Rental rental : rentals) {
 
             // show figures for this rental
-            result += "\t" + rental.getMovie().getTitle() + "\t" + String.valueOf(rental.getCharge()) + "\n";
+            result.append("\t").append(rental.getMovie().getTitle()).append("\t").append(String.valueOf(rental.getCharge())).append("\n");
         }
 
-        result += "Amount owed is " + String.valueOf(getTotalAmount()) + "\n";
-        result += "You earned " + String.valueOf(getTotalFrequentRenterPoints()) + " frequent renter points";
+        result.append("Amount owed is ").append(String.valueOf(getTotalAmount())).append("\n");
+        result.append("You earned ").append(String.valueOf(getTotalFrequentRenterPoints())).append(" frequent renter points");
 
-        return result;
+        return result.toString();
     }
 
-    public double getTotalAmount(){
+    private double getTotalAmount(){
         double totalAmount = 0;
         for (Rental rental : this.rentals) {
             totalAmount += rental.getCharge();
         }
         return totalAmount;
     }
-    public int getTotalFrequentRenterPoints(){
+    private int getTotalFrequentRenterPoints(){
         int frequentRenterPoints = 0;
         for (Rental rental : this.rentals) {
             frequentRenterPoints += rental.getFrequentRenterPoints();

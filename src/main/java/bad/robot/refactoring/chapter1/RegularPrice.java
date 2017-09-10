@@ -1,9 +1,7 @@
 package bad.robot.refactoring.chapter1;
 
 public class RegularPrice extends Price {
-    int getPriceCode() {
-        return Movie.REGULAR;
-    }
+
 
     @Override
     protected double getCharge(int daysRented){

@@ -6,8 +6,7 @@ public class Movie {
     public static final int REGULAR = 0;
     public static final int NEW_RELEASE = 1;
 
-    private String title;
-    private int priceCode;
+    private final String title;
     private Price price;
 
     public Movie(String title, int priceCode) {
@@ -19,11 +18,7 @@ public class Movie {
         return title;
     }
 
-    public int getPriceCode() {
-        return price.getPriceCode();
-    }
-
-    public void setPriceCode(int priceCode) {
+    private void setPriceCode(int priceCode) {
         switch (priceCode) {
             case REGULAR:
                 price = new RegularPrice();
@@ -39,7 +34,7 @@ public class Movie {
         }
     }
 
-    protected double getCharge(int daysRented) {
+    double getCharge(int daysRented) {
         return price.getCharge(daysRented);
     }
 
